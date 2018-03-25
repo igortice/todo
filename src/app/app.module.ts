@@ -6,6 +6,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrModule } from 'ngx-toastr';
 
 import { AppComponent } from './app.component';
+import { CoreModule } from './core/core.module';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { AppComponent } from './app.component';
       easeTime:      500,
       timeOut:       1500,
       progressBar:   true
-    })
+    }),
+    CoreModule
   ],
   providers:    [],
   bootstrap:    [ AppComponent ]
