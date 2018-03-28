@@ -7,13 +7,19 @@ import { HomeComponent } from './home/home.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { AboutComponent } from './about/about.component';
 import { CardComponent } from './card/card.component';
+import { SortablejsModule } from 'angular-sortablejs';
+import { FormsModule } from '@angular/forms';
+import { CardService } from '../models/card/card.service';
 
 @NgModule({
   imports:      [
     CommonModule,
-    RouterModule
+    RouterModule,
+    SortablejsModule,
+    FormsModule
   ],
   exports:      [ PagesComponent, RouterModule ],
-  declarations: [ PagesComponent, HomeComponent, NotFoundComponent, AboutComponent, CardComponent ]
+  declarations: [ PagesComponent, HomeComponent, NotFoundComponent, AboutComponent, CardComponent ],
+  providers:    [ CardService ]
 })
 export class PagesModule {}
