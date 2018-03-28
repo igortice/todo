@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrModule } from 'ngx-toastr';
+import { SortablejsModule } from 'angular-sortablejs';
 
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
@@ -22,6 +23,7 @@ import { CoreModule } from './core/core.module';
       timeOut:       1500,
       progressBar:   true
     }),
+    SortablejsModule.forRoot({ animation: 150 }),
     CoreModule
   ],
   providers:    [],
