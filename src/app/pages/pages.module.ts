@@ -6,6 +6,7 @@ import { PagesComponent } from './pages.component';
 import { HomeComponent } from './home/home.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { AboutComponent } from './about/about.component';
+import { CardComponent } from './card/card.component';
 
 @NgModule({
   imports:      [
@@ -13,6 +14,6 @@ import { AboutComponent } from './about/about.component';
     RouterModule
   ],
   exports:      [ PagesComponent, RouterModule ],
-  declarations: [ PagesComponent, HomeComponent, NotFoundComponent, AboutComponent ]
+  declarations: [ PagesComponent, HomeComponent, NotFoundComponent, AboutComponent, CardComponent ]
 })
 export class PagesModule {}

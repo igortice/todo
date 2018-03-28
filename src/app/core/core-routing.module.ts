@@ -4,10 +4,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from '../pages/home/home.component';
 import { NotFoundComponent } from '../pages/not-found/not-found.component';
 import { AboutComponent } from '../pages/about/about.component';
+import { CardComponent } from '../pages/card/card.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '', redirectTo: 'cards', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
+  { path: 'cards', component: CardComponent },
   { path: 'about', component: AboutComponent },
   { path: 'auth', loadChildren: '../auth/auth.module#AuthModule' },
   { path: '**', component: NotFoundComponent }
