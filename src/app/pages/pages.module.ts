@@ -10,6 +10,7 @@ import { CardComponent } from './card/card.component';
 import { SortablejsModule } from 'angular-sortablejs';
 import { FormsModule } from '@angular/forms';
 import { CardService } from '../models/card/card.service';
+import { AuthService } from '../auth/auth.service';
 
 @NgModule({
   imports:      [
@@ -20,6 +21,6 @@ import { CardService } from '../models/card/card.service';
   ],
   exports:      [ PagesComponent, RouterModule ],
   declarations: [ PagesComponent, HomeComponent, NotFoundComponent, AboutComponent, CardComponent ],
-  providers:    [ CardService ]
+  providers:    [ CardService, AuthService ]
 })
 export class PagesModule {}

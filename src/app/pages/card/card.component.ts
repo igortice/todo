@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Card } from '../../models/card/card';
 import { SortablejsOptions } from 'angular-sortablejs';
 import { CardService } from '../../models/card/card.service';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector:    'app-card',
@@ -22,10 +23,14 @@ export class CardComponent implements OnInit {
     group: 'tasks'
   };
 
-  constructor(private cardService: CardService) {}
+  constructor(
+    private cardService: CardService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit() {
     this.loadingCards = true;
+    console.log(this.authService.isAuthenticated());
 
     this.cardService.all().subscribe(
       result => this.cards = result,

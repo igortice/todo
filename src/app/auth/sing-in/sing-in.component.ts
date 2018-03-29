@@ -14,6 +14,7 @@ export class SingInComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.log(this.authService.isAuthenticated());
   }
 
   loginGoogle() {

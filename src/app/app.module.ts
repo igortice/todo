@@ -39,7 +39,7 @@ registerLocaleData(localePt, 'pt-BR');
     AngularFireAuthModule
   ],
   providers:    [
-    { provide: LOCALE_ID, useValue: 'pt-BR' }
+    { provide: LOCALE_ID, useValue: 'pt-BR' },
   ],
   bootstrap:    [ AppComponent ]
 })

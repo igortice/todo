@@ -5,6 +5,7 @@ import { LayoutComponent } from './layout.component';
 import { HeaderComponent } from './header/header.component';
 import { MainComponent } from './main/main.component';
 import { PagesModule } from '../pages/pages.module';
+import { AuthService } from '../auth/auth.service';
 
 @NgModule({
   imports:      [
@@ -12,6 +13,7 @@ import { PagesModule } from '../pages/pages.module';
     PagesModule
   ],
   exports:      [ LayoutComponent ],
-  declarations: [ LayoutComponent, HeaderComponent, MainComponent ]
+  declarations: [ LayoutComponent, HeaderComponent, MainComponent ],
+  providers:    [ AuthService ]
 })
 export class LayoutModule {}

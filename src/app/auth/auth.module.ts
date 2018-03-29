@@ -6,6 +6,7 @@ import { AuthComponent } from './auth.component';
 import { SingInComponent } from './sing-in/sing-in.component';
 import { SingUpComponent } from './sing-up/sing-up.component';
 import { AuthService } from './auth.service';
+import { AuthGuard } from './auth.guard';
 
 @NgModule({
   imports:      [
@@ -14,7 +15,8 @@ import { AuthService } from './auth.service';
   ],
   declarations: [ AuthComponent, SingInComponent, SingUpComponent ],
   providers: [
-    AuthService
+    AuthService,
+    AuthGuard
   ]
 })
 export class AuthModule {}
