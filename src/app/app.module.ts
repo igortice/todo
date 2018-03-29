@@ -1,14 +1,20 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { registerLocaleData } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import localePt from '@angular/common/locales/pt';
+
+
 import { ToastrModule } from 'ngx-toastr';
 import { SortablejsModule } from 'angular-sortablejs';
-import { registerLocaleData } from '@angular/common';
-import localePt from '@angular/common/locales/pt';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+
 
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FIREBASE_CONFIG } from '../environments/firebase';
 
 registerLocaleData(localePt, 'pt-BR');
 
@@ -28,7 +34,9 @@ registerLocaleData(localePt, 'pt-BR');
       progressBar:   true
     }),
     SortablejsModule.forRoot({ animation: 150 }),
-    CoreModule
+    CoreModule,
+    AngularFireModule.initializeApp(FIREBASE_CONFIG),
+    AngularFireAuthModule
   ],
   providers:    [
     { provide: LOCALE_ID, useValue: 'pt-BR' }
