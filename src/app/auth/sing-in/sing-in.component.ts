@@ -21,4 +21,8 @@ export class SingInComponent implements OnInit {
     this.authService.googleLogin();
   }
 
+  logout() {
+    this.authService.logout();
+  }
+
 }

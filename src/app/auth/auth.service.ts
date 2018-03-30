@@ -27,28 +27,6 @@ export class AuthService {
     );
   }
 
-  login(email: string, password: string) {
-    this.afAuth.auth.signInWithEmailAndPassword(email, password)
-      .then(value => {
-        console.log('Nice, it worked!');
-        this.router.navigate(['/']);
-      })
-      .catch(err => {
-        console.log('Something went wrong: ', err.message);
-      });
-  }
-
-  emailSignup(email: string, password: string) {
-    this.afAuth.auth.createUserWithEmailAndPassword(email, password)
-      .then(value => {
-        console.log('Sucess', value);
-        this.router.navigate(['/']);
-      })
-      .catch(error => {
-        console.log('Something went wrong: ', error);
-      });
-  }
-
   googleLogin() {
     const provider = new firebase.auth.GoogleAuthProvider();
     return this.oAuthLogin(provider)
@@ -64,12 +42,12 @@ export class AuthService {
 
   logout() {
     this.afAuth.auth.signOut().then(() => {
-      this.router.navigate(['/auth/login']);
+      this.router.navigate(['/auth/register']);
     });
   }
 
   isAuthenticated(): boolean {
-    return this.userDetails == null ? false : true;
+    return this.userDetails !== null;
   }
 
   private oAuthLogin(provider) {
