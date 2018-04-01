@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { CoreRoutingModule } from './core-routing.module';
 import { RouterModule } from '@angular/router';
 import { LayoutModule } from '../layout/layout.module';
+import { AuthGuard } from '../auth/auth.guard';
 
 @NgModule({
   imports:      [
@@ -14,6 +15,7 @@ import { LayoutModule } from '../layout/layout.module';
     RouterModule,
     LayoutModule
   ],
-  declarations: []
+  declarations: [],
+  providers:    [ AuthGuard ]
 })
 export class CoreModule {}

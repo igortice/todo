@@ -5,11 +5,12 @@ import { HomeComponent } from '../pages/home/home.component';
 import { NotFoundComponent } from '../pages/not-found/not-found.component';
 import { AboutComponent } from '../pages/about/about.component';
 import { CardComponent } from '../pages/card/card.component';
+import { AuthGuard } from '../auth/auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'cards', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
-  { path: 'cards', component: CardComponent },
+  { path: 'cards', component: CardComponent, canActivate: [ AuthGuard ] },
   { path: 'about', component: AboutComponent },
   { path: 'auth', loadChildren: '../auth/auth.module#AuthModule' },
   { path: '**', component: NotFoundComponent }

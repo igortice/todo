@@ -30,7 +30,7 @@ registerLocaleData(localePt, 'pt-BR');
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-full-width',
       easeTime:      500,
-      timeOut:       1500,
+      timeOut:       3000,
       progressBar:   true
     }),
     SortablejsModule.forRoot({ animation: 150 }),
@@ -39,7 +39,7 @@ registerLocaleData(localePt, 'pt-BR');
     AngularFireAuthModule
   ],
   providers:    [
-    { provide: LOCALE_ID, useValue: 'pt-BR' },
+    { provide: LOCALE_ID, useValue: 'pt-BR' }
   ],
   bootstrap:    [ AppComponent ]
 })
