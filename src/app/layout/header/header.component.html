@@ -6,12 +6,15 @@
           <h4 class='text-white'>
             <a class='text-white' routerLink='/about'>About</a>
           </h4>
-          <p class='text-muted'>Add some information about the album below, the author, or any other background context.
-                                Make it a few sentences long so folks can pick up some informative tidbits. Then, link
-                                them off to some social networking sites or contact information.</p>
+          <h6 *ngIf='authService.isAuthenticated()' class='text-white'>
+            <a class='text-white' routerLink='/auth/logout'>Logout <i class='fa fa-sign-out'></i></a>
+          </h6>
+          <!--<p class='text-muted'>Add some information about the album below, the author, or any other background context.-->
+                                <!--Make it a few sentences long so folks can pick up some informative tidbits. Then, link-->
+                                <!--them off to some social networking sites or contact information.</p>-->
         </div>
         <div class='col-sm-4 offset-md-1 py-4'>
-          <h4 class='text-white'>Contact</h4>
+          <h4 class='text-white'>Pages</h4>
           <ul class='list-unstyled'>
             <li><a routerLink='/auth/login' class='text-white'>Sing In</a></li>
             <li><a routerLink='/auth/register' class='text-white'>Sing Up</a></li>

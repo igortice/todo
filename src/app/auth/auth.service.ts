@@ -50,7 +50,7 @@ export class AuthService {
     this.afAuth.auth.signOut().then(() => {
       this.toastr.warning('Logout realizado com êxito!', 'Logout!');
 
-      this.router.navigate([ '/auth/register' ]);
+      this.router.navigate([ '/auth/login' ]);
     });
   }
 
