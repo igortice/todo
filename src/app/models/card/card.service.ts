@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Card } from './card';
-import { CARD_MOCKS } from './card.mocks';
 import { Task } from '../task/task';
 import { v4 as uuid } from 'uuid';
 import { ToastrService } from 'ngx-toastr';
@@ -11,8 +10,9 @@ import 'rxjs/add/operator/delay';
 
 @Injectable()
 export class CardService {
-  // cards: Card[] = [];
-  cards: Card[] = CARD_MOCKS;
+  cards: Card[] = [];
+
+  // cards: Card[] = CARD_MOCKS;
 
   constructor(private toastr: ToastrService) {}
 

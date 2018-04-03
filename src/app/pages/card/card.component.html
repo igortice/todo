@@ -17,68 +17,69 @@
 
 
 <div class='py-2'>
-  <div class='container'>
-    <div *ngIf='loadingCards; else loadingCardsFinish'>
-      <h1 class='fa-5x text-center text-muted'>
-        <i class='fa fa-spinner fa-pulse'></i>
-      </h1>
-    </div>
-    <ng-template #loadingCardsFinish>
-      <div class='card-columns'
-           *ngIf='hasCards(); else semCards'
-           [sortablejs]='cards'
-           [sortablejsOptions]='optionCards'>
-        <div class='card mb-4 box-shadow animated fadeIn' *ngFor='let card of cards; let ci = index;'>
-          <div class='card-header'>
-            <div class='d-flex justify-content-between align-items-center'>
-              <div *ngIf='!editCardName[ci];'
-                   (click)='editCardName[ci]=true;'>
-                {{ card.name }}
-              </div>
-              <input type='text' class='form-control form-control-sm'
-                     *ngIf='editCardName[ci]'
-                     (keydown.enter)='editCardName[ci]=false'
-                     (mouseout)='editCardName[ci]=false'
-                     [(ngModel)]='card.name'>
-              <div class='text-muted'>
+  <div *ngIf='loadingCards; else loadingCardsFinish'>
+    <h1 class='fa-5x text-center text-muted'>
+      <i class='fa fa-spinner fa-pulse'></i>
+    </h1>
+  </div>
+
+  <ng-template #loadingCardsFinish>
+    <div class='card-columns'
+         *ngIf='hasCards(); else semCards'
+         [sortablejs]='cards'
+         [sortablejsOptions]='optionCards'>
+      <div class='card mb-4 box-shadow animated fadeIn' *ngFor='let card of cards; let ci = index;'>
+        <div class='card-header'>
+          <div class='d-flex justify-content-between align-items-center'>
+            <div *ngIf='!editCardName[ci];'
+                 (click)='editCardName[ci]=true;'>
+              {{ card.name }}
+            </div>
+            <input type='text' class='form-control form-control-sm'
+                   *ngIf='editCardName[ci]'
+                   (keydown.enter)='editCardName[ci]=false'
+                   (mouseout)='editCardName[ci]=false'
+                   [(ngModel)]='card.name'>
+            <div class='text-muted'>
                 <span *ngIf='!loadingRemoveCard[ci]; else loadingRemoveCardWait'>
                   <i class='fa fa-trash' (click)='removeCard(card.id, ci)'></i>
                 </span>
-                <ng-template #loadingRemoveCardWait><i class='fa fa-spinner fa-pulse'></i></ng-template>
-              </div>
-            </div>
-          </div>
-          <div class='card-body pt-1'>
-            <div class='text-muted my-1'>
-              <span class='badge badge-success'>{{ countTask(card).ativo }} feito</span>
-              <span class='badge badge-warning text-white'>{{ countTask(card).inativo }} a fazer</span>
-            </div>
-            <div [sortablejs]='card.tasks' [sortablejsOptions]='optionTasks'>
-              <div class='custom-control custom-checkbox' *ngFor='let task of card.tasks; let ct = index'>
-                <input type='checkbox' class='custom-control-input'
-                       id='card-{{ ci }}-task-{{ ct }}'
-                       [checked]='task.checked'
-                       (change)='task.checked = ! task.checked'>
-                <label class='custom-control-label'
-                       for='card-{{ ci }}-task-{{ ct }}'
-                       [ngClass]='{"task-checked": task.checked}'>
-                  {{ task.desc }}
-                </label>
-                <i class='fa fa-times pull-right' (click)='removeTask(card, task.id)'></i>
-              </div>
-            </div>
-            <div class='mt-2'>
-              <input type='text'
-                     class='form-control form-control-sm'
-                     placeholder='adicioncar tarefa'
-                     #descHtml
-                     (keyup.enter)='createTask(card, descHtml)'>
+              <ng-template #loadingRemoveCardWait><i class='fa fa-spinner fa-pulse'></i></ng-template>
             </div>
           </div>
         </div>
+        <div class='card-body pt-1'>
+          <div class='text-muted my-1'>
+            <span class='badge badge-success'>{{ countTask(card).ativo }} feito</span>
+            <span class='badge badge-warning text-white'>{{ countTask(card).inativo }} a fazer</span>
+          </div>
+          <div [sortablejs]='card.tasks' [sortablejsOptions]='optionTasks'>
+            <div class='custom-control custom-checkbox' *ngFor='let task of card.tasks; let ct = index'>
+              <input type='checkbox' class='custom-control-input'
+                     id='card-{{ ci }}-task-{{ ct }}'
+                     [checked]='task.checked'
+                     (change)='task.checked = ! task.checked'>
+              <label class='custom-control-label'
+                     for='card-{{ ci }}-task-{{ ct }}'
+                     [ngClass]='{"task-checked": task.checked}'>
+                {{ task.desc }}
+              </label>
+              <i class='fa fa-times pull-right' (click)='removeTask(card, task.id)'></i>
+            </div>
+          </div>
+          <div class='mt-2'>
+            <input type='text'
+                   class='form-control form-control-sm'
+                   placeholder='adicioncar tarefa'
+                   #descHtml
+                   (keyup.enter)='createTask(card, descHtml)'>
+          </div>
+        </div>
       </div>
+    </div>
 
-      <ng-template #semCards>
+    <ng-template #semCards>
+      <div class='row'>
         <div class='col-md-12 animated fadeIn'>
           <div class='card text-white bg-danger'>
             <div class='card-body m-3'>
@@ -88,7 +89,7 @@
             </div>
           </div>
         </div>
-      </ng-template>
+      </div>
     </ng-template>
-  </div>
+  </ng-template>
 </div>
