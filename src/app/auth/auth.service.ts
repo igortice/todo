@@ -11,7 +11,7 @@ import { ToastrService } from 'ngx-toastr';
 @Injectable()
 export class AuthService {
   private user: Observable<firebase.User>;
-  private userDetails: firebase.User = null;
+  public userDetails: firebase.User = null;
 
   constructor(
     private afAuth: AngularFireAuth,

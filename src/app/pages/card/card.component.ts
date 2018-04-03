@@ -32,11 +32,14 @@ export class CardComponent implements OnInit {
     this.loadingCards = true;
     console.log(this.authService.isAuthenticated());
 
-    this.cardService.all().subscribe(
-      result => this.cards = result,
-      () => {},
-      () => this.loadingCards = false
-    );
+    this.cardService.all()
+      .subscribe(
+        result => {
+          this.cards        = result;
+          this.loadingCards = false;
+        },
+        () => {}
+      );
   }
 
   createCard(): void {

@@ -10,6 +10,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { SortablejsModule } from 'angular-sortablejs';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
 
 
 import { AppComponent } from './app.component';
@@ -36,7 +37,8 @@ registerLocaleData(localePt, 'pt-BR');
     SortablejsModule.forRoot({ animation: 150 }),
     CoreModule,
     AngularFireModule.initializeApp(FIREBASE_CONFIG),
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    AngularFireDatabaseModule
   ],
   providers:    [
     { provide: LOCALE_ID, useValue: 'pt-BR' }

@@ -7,6 +7,8 @@ import { DatePipe } from '@angular/common';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import 'rxjs/add/operator/delay';
+import { AngularFireDatabase } from 'angularfire2/database';
+import { AuthService } from '../../auth/auth.service';
 
 @Injectable()
 export class CardService {
@@ -14,10 +16,14 @@ export class CardService {
 
   // cards: Card[] = CARD_MOCKS;
 
-  constructor(private toastr: ToastrService) {}
+  constructor(
+    private toastr: ToastrService,
+    private db: AngularFireDatabase,
+    private authService: AuthService
+  ) {}
 
   all(): Observable<Card[]> {
-    return of(this.cards.slice()).delay(500);
+    return this.db.list<Card>(`cards/${this.authService.userDetails.uid}`).valueChanges();
   }
 
   create(): Observable<CardService> {
