@@ -50,8 +50,8 @@
         </div>
         <div class='card-body pt-1'>
           <div class='text-muted my-1'>
-            <span class='badge badge-success'>{{ countTask(card).ativo }} feito</span>
-            <span class='badge badge-warning text-white'>{{ countTask(card).inativo }} a fazer</span>
+            <!--<span class='badge badge-success'>{{ countTask(card).ativo }} feito</span>-->
+            <!--<span class='badge badge-warning text-white'>{{ countTask(card).inativo }} a fazer</span>-->
           </div>
           <div [sortablejs]='card.tasks' [sortablejsOptions]='optionTasks'>
             <div class='custom-control custom-checkbox' *ngFor='let task of card.tasks; let ct = index'>

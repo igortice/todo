@@ -7,12 +7,13 @@ import { DatePipe } from '@angular/common';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import 'rxjs/add/operator/delay';
-import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { AuthService } from '../../auth/auth.service';
 
 @Injectable()
 export class CardService {
-  cards: Card[] = [];
+  cards: AngularFireList<Card> = null;
+  userId: string;
 
   // cards: Card[] = CARD_MOCKS;
 
@@ -20,26 +21,29 @@ export class CardService {
     private toastr: ToastrService,
     private db: AngularFireDatabase,
     private authService: AuthService
-  ) {}
-
-  all(): Observable<Card[]> {
-    return this.db.list<Card>(`cards/${this.authService.userDetails.uid}`).valueChanges();
+  ) {
+    this.userId = this.authService.userDetails.uid;
+    this.cards  = this.db.list<Card>(`cards/${this.userId}`);
   }
 
-  create(): Observable<CardService> {
+  all(): Observable<Card[]> {
+    return this.cards.valueChanges();
+  }
+
+  create(): Observable<Card[]> {
     const now         = Date.now();
     const pipe        = new DatePipe('pt-BR');
     const result_date = pipe.transform(now, 'short');
 
-    this.cards.push(new Card(uuid(), this.cards.length + 1, `Card ${result_date}`, []));
+    this.cards.push(new Card(`${uuid()}`, `Card ${result_date}`, []));
 
     this.toastr.success('CARD CRIADO!', 'INSERSÃO!');
 
-    return of(this).delay(500);
+    return this.cards.valueChanges();
   }
 
   delete(id: string): Observable<CardService> {
-    this.cards = this.cards.filter(card => card.id !== id);
+    // this.cards = this.cards.filter(card => card.id !== id);
 
     this.toastr.warning('CARD REMOVIDO!', 'DELEÇÃO!');
 
@@ -47,7 +51,7 @@ export class CardService {
   }
 
   createTask(card: Card, desc: string): CardService {
-    card.tasks.push(new Task(uuid(), card.tasks.length + 1, false, desc));
+    card.tasks.push(new Task(`${uuid()}`, false, `${desc}`));
 
     this.toastr.success('TAREFA CRIADA!', 'INSERSÃO!');
 

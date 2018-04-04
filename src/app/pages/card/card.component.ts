@@ -46,20 +46,22 @@ export class CardComponent implements OnInit {
     this.loadingCreateCard = true;
 
     this.cardService.create().subscribe(
-      result => this.cards = result.cards,
-      () => {},
-      () => this.loadingCreateCard = false
+      result => {
+        this.cards             = result;
+        this.loadingCreateCard = false;
+      },
+      () => {}
     );
   }
 
   removeCard(id: string, index: number): void {
     this.loadingRemoveCard[ index ] = true;
 
-    this.cardService.delete(id).subscribe(
-      result => this.cards = result.cards,
-      () => {},
-      () => this.loadingRemoveCard[ index ] = false
-    );
+    // this.cardService.delete(id).subscribe(
+    //   result => this.cards = result.cards,
+    //   () => {},
+    //   () => this.loadingRemoveCard[ index ] = false
+    // );
   }
 
   createTask(card: Card, input: HTMLInputElement): void {
