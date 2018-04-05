@@ -27,7 +27,9 @@ export class CardService {
   }
 
   all(): Observable<Card[]> {
-    return this.cards.valueChanges();
+    return this.cards.snapshotChanges().map(changes => {
+      return changes.map(card => ( new Card(card.payload.key, card.payload.val().name, ( card.payload.val().tasks || [] )) ));
+    });
   }
 
   create(): Observable<Card[]> {
@@ -35,19 +37,19 @@ export class CardService {
     const pipe        = new DatePipe('pt-BR');
     const result_date = pipe.transform(now, 'short');
 
-    this.cards.push(new Card(`${uuid()}`, `Card ${result_date}`, []));
+    this.cards.push(new Card(null, `Card ${result_date}`, []));
 
     this.toastr.success('CARD CRIADO!', 'INSERSÃO!');
 
     return this.cards.valueChanges();
   }
 
-  delete(id: string): Observable<CardService> {
-    // this.cards = this.cards.filter(card => card.id !== id);
+  delete(id: string): Observable<Card[]> {
+    this.cards.remove(id);
 
     this.toastr.warning('CARD REMOVIDO!', 'DELEÇÃO!');
 
-    return of(this).delay(500);
+    return this.cards.valueChanges();
   }
 
   createTask(card: Card, desc: string): CardService {

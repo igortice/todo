@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Card } from '../../models/card/card';
 import { SortablejsOptions } from 'angular-sortablejs';
 import { CardService } from '../../models/card/card.service';
-import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector:    'app-card',
@@ -24,13 +23,15 @@ export class CardComponent implements OnInit {
   };
 
   constructor(
-    private cardService: CardService,
-    private authService: AuthService
+    private cardService: CardService
   ) {}
 
   ngOnInit() {
+    this.loadCards();
+  }
+
+  loadCards(): void {
     this.loadingCards = true;
-    console.log(this.authService.isAuthenticated());
 
     this.cardService.all()
       .subscribe(
@@ -57,11 +58,13 @@ export class CardComponent implements OnInit {
   removeCard(id: string, index: number): void {
     this.loadingRemoveCard[ index ] = true;
 
-    // this.cardService.delete(id).subscribe(
-    //   result => this.cards = result.cards,
-    //   () => {},
-    //   () => this.loadingRemoveCard[ index ] = false
-    // );
+    this.cardService.delete(id).subscribe(
+      result => {
+        this.cards                      = result;
+        this.loadingRemoveCard[ index ] = false;
+      },
+      () => {}
+    );
   }
 
   createTask(card: Card, input: HTMLInputElement): void {
