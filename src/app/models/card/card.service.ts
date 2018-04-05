@@ -5,7 +5,6 @@ import { v4 as uuid } from 'uuid';
 import { ToastrService } from 'ngx-toastr';
 import { DatePipe } from '@angular/common';
 import { Observable } from 'rxjs/Observable';
-import { of } from 'rxjs/observable/of';
 import 'rxjs/add/operator/delay';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { AuthService } from '../../auth/auth.service';
@@ -26,10 +25,14 @@ export class CardService {
     this.cards  = this.db.list<Card>(`cards/${this.userId}`);
   }
 
-  all(): Observable<Card[]> {
+  getCardsChanges() {
     return this.cards.snapshotChanges().map(changes => {
       return changes.map(card => ( new Card(card.payload.key, card.payload.val().name, ( card.payload.val().tasks || [] )) ));
     });
+  }
+
+  all(): Observable<Card[]> {
+    return this.getCardsChanges();
   }
 
   create(): Observable<Card[]> {
@@ -41,7 +44,7 @@ export class CardService {
 
     this.toastr.success('CARD CRIADO!', 'INSERSÃO!');
 
-    return this.cards.valueChanges();
+    return this.getCardsChanges();
   }
 
   delete(id: string): Observable<Card[]> {
@@ -49,7 +52,7 @@ export class CardService {
 
     this.toastr.warning('CARD REMOVIDO!', 'DELEÇÃO!');
 
-    return this.cards.valueChanges();
+    return this.getCardsChanges();
   }
 
   createTask(card: Card, desc: string): CardService {

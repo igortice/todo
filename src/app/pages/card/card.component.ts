@@ -56,15 +56,17 @@ export class CardComponent implements OnInit {
   }
 
   removeCard(id: string, index: number): void {
-    this.loadingRemoveCard[ index ] = true;
+    if (id) {
+      this.loadingRemoveCard[ index ] = true;
 
-    this.cardService.delete(id).subscribe(
-      result => {
-        this.cards                      = result;
-        this.loadingRemoveCard[ index ] = false;
-      },
-      () => {}
-    );
+      this.cardService.delete(id).subscribe(
+        result => {
+          this.cards                      = result;
+          this.loadingRemoveCard[ index ] = false;
+        },
+        () => {}
+      );
+    }
   }
 
   createTask(card: Card, input: HTMLInputElement): void {
